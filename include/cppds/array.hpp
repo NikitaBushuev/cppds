@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstddef>
+#include <utility>
 
 namespace cppds {
     /**
@@ -28,6 +28,25 @@ namespace cppds {
          * Constructs an instance of the array with default-initialized elements.
          */
         array() = default;
+
+        /**
+         * @brief Constructs an array using values from an initializer list.
+         *
+         * Initializes the array with values from the provided initializer list.
+         *
+         * @param il The initializer list containing values to initialize the array.
+         */
+        array(std::initializer_list<value_type> const& il) {
+            size_type i = 0;
+
+            for (const value_type &value: il) {
+                if (i >= N) {
+                    break;
+                }
+
+                m_data[i++] = value;
+            }
+        }
 
         /**
          * @brief Get the length of the array.
