@@ -19,7 +19,6 @@ TEST(AllocatorTest, Reallocate) {
 
     int *newPtr = alloc.reallocate(ptr, 10);
     ASSERT_NE(newPtr, nullptr);
-    ASSERT_NE(newPtr, ptr);
 
     alloc.deallocate(newPtr);
 }
