@@ -25,7 +25,7 @@ Data structures are fundamental building blocks of computer programs. They allow
 Currently, the following data structures are available in this repository:
 
 - [x] array
-- [ ] vector
+- [x] vector
 - [ ] string
 - [ ] list
 - [ ] map
