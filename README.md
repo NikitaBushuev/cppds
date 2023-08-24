@@ -30,7 +30,7 @@ Currently, the following data structures are available in this repository:
 - [ ] list
 - [ ] map
 - [ ] set
-- [ ] stack
+- [x] stack
 - [ ] deque
 - [ ] queue
 
