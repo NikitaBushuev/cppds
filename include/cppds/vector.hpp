@@ -3,8 +3,8 @@
 #include <cppds/allocator.hpp>
 
 #include <cstring>
-
 #include <utility>
+#include <stdexcept>
 
 namespace cppds {
     template <typename T, typename Alloc = allocator<T>>
@@ -20,8 +20,8 @@ namespace cppds {
 
         vector() = default;
 
-        vector(std::initializer_list<T> const& il) {
-            for (auto const& value: il) {
+        vector(const std::initializer_list<T> &il) {
+            for (const auto &value: il) {
                 push_back(value);
             }
         }
@@ -30,10 +30,13 @@ namespace cppds {
             clear();
         }
 
-        inline void push_back(value_type const& value) {
-            ++m_length;
-            m_data = m_alloc.reallocate(m_data, m_length);
-            m_data[m_length - 1] = value;
+        inline void push_back(const value_type &value) {
+            ++this->m_length;
+
+            this->m_data = (pointer)
+                this->m_alloc.reallocate(this->m_data, this->m_length);
+            
+            this->m_data[this->m_length - 1] = value;
         }
 
         inline void pop_back() {
@@ -41,30 +44,47 @@ namespace cppds {
                 return;
             }
 
-            --m_length;
-            m_data[m_length].~value_type();
-            m_data = m_alloc.reallocate(m_data, m_length);
+            --this->m_length;
+
+            this->m_data[this->m_length].~value_type();
+
+            this->m_data = (pointer)
+                m_alloc.reallocate(this->m_data, this->m_length);
         }
 
-        inline size_type length() const noexcept {
-            return m_length;
+        constexpr inline size_type length() const noexcept {
+            return this->m_length;
         }
 
         inline bool empty() const noexcept {
-            return not m_length;
+            return not this->m_length;
         }
 
         inline void clear() {
-            while (not empty()) {
-                pop_back();
+            while (not this->empty()) {
+                this->pop_back();
             }
         }
 
-        constexpr inline reference operator[](size_type pos) noexcept {
+        inline reference back() {
+            return this->operator[](this->m_length - 1);
+        }
+
+        inline const_reference back() const {
+            return this->operator[](this->m_length - 1);
+        }
+
+        constexpr inline reference operator[](size_type pos) {
+            if (pos >= this->m_length) {
+                throw std::out_of_range("index out of range");
+            }
             return this->m_data[pos];
         }
 
-        constexpr inline const_reference operator[](size_type pos) const noexcept {
+        constexpr inline const_reference operator[](size_type pos) const {
+            if (pos >= this->m_length) {
+                throw std::out_of_range("index out of range");
+            }
             return this->m_data[pos];
         }
     
