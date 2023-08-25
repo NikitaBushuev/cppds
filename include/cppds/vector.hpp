@@ -2,8 +2,6 @@
 
 #include <cppds/allocator.hpp>
 
-#include <cstring>
-#include <utility>
 #include <stdexcept>
 
 namespace cppds {
