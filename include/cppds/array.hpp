@@ -1,7 +1,6 @@
 #pragma once
 
-#include <utility>
-
+#include <stdexcept>
 namespace cppds {
     /**
      * @brief A fixed-size array template class.
@@ -15,12 +14,8 @@ namespace cppds {
     template <typename T, std::size_t N>
     class array {
     public:
-        using value_type = T;                    ///< The type of elements in the array.
-        using size_type = std::size_t;           ///< The type used for size-related operations.
-        using reference = value_type &;          ///< Reference to an element in the array.
-        using const_reference = const value_type &; ///< Const reference to an element in the array.
-        using pointer = value_type *;            ///< Pointer to an element in the array.
-        using const_pointer = const value_type *; ///< Const pointer to an element in the array.
+        using size_type = std::size_t; ///< The type used for size-related operations.
+        using value_type = T; ///< The type of elements in the array.
 
         /**
          * @brief Default constructor.
@@ -65,7 +60,10 @@ namespace cppds {
          * @param pos The index of the element to access.
          * @return Reference to the element at the specified index.
          */
-        constexpr inline reference operator[](size_type pos) noexcept {
+        constexpr inline value_type &operator[](size_type pos) {
+            if (pos >= this->length()) {
+                throw std::out_of_range("index out of range");
+            }
             return this->m_data[pos];
         }
 
@@ -77,7 +75,10 @@ namespace cppds {
          * @param pos The index of the element to access.
          * @return Const reference to the element at the specified index.
          */
-        constexpr inline const_reference operator[](size_type pos) const noexcept {
+        constexpr inline const value_type &operator[](size_type pos) const {
+            if (pos >= this->length()) {
+                throw std::out_of_range("index out of range");
+            }
             return this->m_data[pos];
         }
 

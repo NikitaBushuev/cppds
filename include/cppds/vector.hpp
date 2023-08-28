@@ -8,12 +8,8 @@ namespace cppds {
     template <typename T, typename Alloc = allocator<T>>
     class vector {
     public:
-        using value_type = T;
         using size_type = std::size_t;
-        using reference = value_type &;
-        using const_reference = const value_type &;
-        using pointer = value_type *;
-        using const_pointer = const value_type *;
+        using value_type = T;
         using allocator_type = Alloc;
 
         vector() = default;
@@ -31,7 +27,7 @@ namespace cppds {
         inline void push_back(const value_type &value) {
             ++this->m_length;
 
-            this->m_data = (pointer)
+            this->m_data = (value_type *)
                 this->m_alloc.reallocate(this->m_data, this->m_length);
             
             this->m_data[this->m_length - 1] = value;
@@ -46,7 +42,7 @@ namespace cppds {
 
             this->m_data[this->m_length].~value_type();
 
-            this->m_data = (pointer)
+            this->m_data = (value_type *)
                 m_alloc.reallocate(this->m_data, this->m_length);
         }
 
@@ -64,22 +60,22 @@ namespace cppds {
             }
         }
 
-        inline reference back() {
+        inline value_type &back() {
             return this->operator[](this->m_length - 1);
         }
 
-        inline const_reference back() const {
+        inline const value_type &back() const {
             return this->operator[](this->m_length - 1);
         }
 
-        constexpr inline reference operator[](size_type pos) {
+        constexpr inline value_type &operator[](size_type pos) {
             if (pos >= this->m_length) {
                 throw std::out_of_range("index out of range");
             }
             return this->m_data[pos];
         }
 
-        constexpr inline const_reference operator[](size_type pos) const {
+        constexpr inline const value_type &operator[](size_type pos) const {
             if (pos >= this->m_length) {
                 throw std::out_of_range("index out of range");
             }
@@ -87,7 +83,7 @@ namespace cppds {
         }
     
     protected:
-        pointer m_data {};
+        value_type *m_data {};
         size_type m_length {};
         allocator_type m_alloc {};
     };

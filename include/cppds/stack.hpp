@@ -9,35 +9,35 @@ namespace cppds {
     public:
         using size_type = typename vector<T, Alloc>::size_type;
         using value_type = typename vector<T, Alloc>::value_type;
-        using reference = typename vector<T, Alloc>::reference;
+        using allocator_type = typename vector<T, Alloc>::allocator_type;
 
         stack() = default;
 
         stack(const std::initializer_list<T> &il):
-            vector<T, Alloc>::vector(il) {}
+            vector<value_type, allocator_type>::vector(il) {}
         
         inline void push(const value_type &value) {
-            vector<T, Alloc>::push_back(value);
+            vector<value_type, allocator_type>::push_back(value);
         }
 
         inline void pop() {
-            vector<T, Alloc>::pop_back();
+            vector<value_type, allocator_type>::pop_back();
         }
 
-        inline reference top() {
-            return vector<T, Alloc>::back();
+        inline value_type &top() {
+            return vector<value_type, allocator_type>::back();
         }
 
         inline size_type length() const noexcept {
-            return vector<T, Alloc>::length();
+            return vector<value_type, allocator_type>::length();
         }
 
         inline bool empty() const noexcept {
-            return vector<T, Alloc>::empty();
+            return vector<value_type, allocator_type>::empty();
         }
 
         inline void clear() {
-            vector<T, Alloc>::clear();
+            vector<value_type, allocator_type>::clear();
         }
     };
 }
