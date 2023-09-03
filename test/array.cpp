@@ -2,9 +2,10 @@
 
 #include <gtest/gtest.h>
 
-TEST(ArrayTest, LengthTest) {
+TEST(ArrayTest, sizeTest) {
     cppds::array<int, 5> arr;
-    EXPECT_EQ(arr.length(), 5);
+
+    EXPECT_EQ(arr.size(), 5);
 }
 
 TEST(ArrayTest, ElementAccessTest) {
@@ -17,6 +18,7 @@ TEST(ArrayTest, ElementAccessTest) {
 
 TEST(ArrayTest, ConstElementAccessTest) {
     const cppds::array<int, 4> constArr = {5, 15, 25, 35};
+    
     EXPECT_EQ(constArr[0], 5);
     EXPECT_EQ(constArr[1], 15);
     EXPECT_EQ(constArr[2], 25);
