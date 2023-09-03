@@ -5,7 +5,7 @@
 TEST(StackTest, EmptyStack) {
     cppds::stack<int> v;
 
-    EXPECT_EQ(v.length(), 0);
+    EXPECT_EQ(v.size(), 0);
 }
 
 TEST(StackTest, PushAndAccess) {
@@ -20,13 +20,13 @@ TEST(StackTest, PushAndAccess) {
     v.push(30);
     EXPECT_EQ(v.top(), 30);
 
-    EXPECT_EQ(v.length(), 3);
+    EXPECT_EQ(v.size(), 3);
 }
 
 TEST(StackTest, ElementAcess) {
     cppds::stack<int> v = {10, 20, 30};
 
-    EXPECT_EQ(v.length(), 3);
+    EXPECT_EQ(v.size(), 3);
 
     EXPECT_EQ(v.top(), 30);
     v.pop();
@@ -43,5 +43,5 @@ TEST(StackTest, Clear) {
 
     v.clear();
 
-    EXPECT_EQ(v.length(), 0);
+    EXPECT_EQ(v.size(), 0);
 }
