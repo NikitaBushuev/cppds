@@ -5,7 +5,7 @@
 TEST(VectorTest, EmptyVector) {
     cppds::vector<int> v;
 
-    EXPECT_EQ(v.length(), 0);
+    EXPECT_EQ(v.size(), 0);
 }
 
 TEST(VectorTest, PushAndAccess) {
@@ -15,7 +15,7 @@ TEST(VectorTest, PushAndAccess) {
     v.push_back(20);
     v.push_back(30);
 
-    EXPECT_EQ(v.length(), 3);
+    EXPECT_EQ(v.size(), 3);
 
     EXPECT_EQ(v[0], 10);
     EXPECT_EQ(v[1], 20);
@@ -25,7 +25,7 @@ TEST(VectorTest, PushAndAccess) {
 TEST(VectorTest, ElementAccess) {
     cppds::vector<int> v = {10, 20, 30};
 
-    EXPECT_EQ(v.length(), 3);
+    EXPECT_EQ(v.size(), 3);
 
     EXPECT_EQ(v[0], 10);
     EXPECT_EQ(v[1], 20);
@@ -40,7 +40,7 @@ TEST(VectorTest, Pop) {
 
     v.pop_back();
 
-    EXPECT_EQ(v.length(), 1);
+    EXPECT_EQ(v.size(), 1);
     EXPECT_EQ(v[0], 10);
 }
 
@@ -49,5 +49,5 @@ TEST(VectorTest, Clear) {
 
     v.clear();
 
-    EXPECT_EQ(v.length(), 0);
+    EXPECT_EQ(v.size(), 0);
 }
