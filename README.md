@@ -29,7 +29,7 @@ Currently, the following data structures are available in this repository:
 - [ ] string
 - [ ] list
 - [ ] map
-- [ ] set
+- [x] set
 - [x] stack
 - [ ] deque
 - [ ] queue
