@@ -28,7 +28,7 @@ Currently, the following data structures are available in this repository:
 - [x] vector
 - [ ] string
 - [ ] list
-- [ ] map
+- [x] map
 - [x] set
 - [x] stack
 - [ ] deque
