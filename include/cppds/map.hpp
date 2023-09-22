@@ -11,6 +11,7 @@
 #include <stdexcept>
 
 #include "hash.hpp" // Include necessary header(s)
+#include "pair.hpp"
 
 namespace cppds {
     /**
@@ -19,18 +20,18 @@ namespace cppds {
      * This map uses open addressing for collision resolution and supports basic operations
      * like insert, erase, contains, clear, size, and empty.
      *
-     * @tparam _KTp The type of keys in the map.
-     * @tparam _Tp The type of values in the map.
+     * @tparam _kTp The type of keys in the map.
+     * @tparam _vTp The type of values in the map.
      */
-    template <typename _KTp, typename _Tp>
+    template <typename _kTp, typename _vTp>
     class map {
     protected:
-        using __pair_type = std::pair<_KTp, _Tp>;
+        using __pair_type = cppds::pair<_kTp, _vTp>;
 
     public:
         // Type aliases for clarity
-        using key_type = _KTp;
-        using value_type = _Tp;
+        using key_type = _kTp;
+        using value_type = _vTp;
         using size_type = std::size_t;
 
         /**
