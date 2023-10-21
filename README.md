@@ -32,7 +32,7 @@ Currently, the following data structures are available in this repository:
 - [x] set
 - [x] stack
 - [ ] deque
-- [ ] queue
+- [x] queue
 
 Each data structure comes with its own set of operations and features to help you solve various programming challenges.
 
