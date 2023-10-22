@@ -9,6 +9,8 @@
 #include <initializer_list>     ///< For std::initializer_list
 #include <stdexcept>            ///< For std::out_of_range exception
 
+#include "pair.hpp"
+
 namespace cppds {
 
     /**
@@ -39,6 +41,16 @@ namespace cppds {
         template <size_type N>
         vector(value_type (&_array)[N]) {
             operator=(_array);
+        }
+
+        /**
+         * @brief Constructor that initializes the vector from a C-style pointer.
+         *
+         * @param _pointer The C-style pointer to copy elements from.
+         * @param _size The size of the C-style pointer.
+         */
+        vector(const value_type *_pointer, size_type _size) {
+            operator=(pair<const value_type *, size_type>(_pointer, _size));
         }
 
         /**
@@ -79,6 +91,26 @@ namespace cppds {
 
             for (const value_type &value : _array) {
                 push_back(value);
+            }
+
+            return *this;
+        }
+
+        /**
+         * @brief Assignment operator for C-style pointers.
+         *
+         * @param _pair The pair of pointer and its size
+         * @return A reference to the modified vector.
+         */
+        vector &operator=(const pair<const value_type *, size_type> &_pair) {
+            const value_type *_pointer = _pair.first;
+
+            size_type _size = _pair.second;
+
+            clear();
+
+            for (size_type i = 0; i < _size; ++i) {
+                push_back(_pointer[i]);
             }
 
             return *this;
